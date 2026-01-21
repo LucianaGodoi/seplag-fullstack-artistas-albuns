@@ -14,3 +14,13 @@ target/
 # OS
 .DS_Store
 Thumbs.db
+
+# Maven wrapper
+.mvn/
+
+# Env
+.env
+.env.*
+
+# Docker volumes (se usar local)
+postgres_data
