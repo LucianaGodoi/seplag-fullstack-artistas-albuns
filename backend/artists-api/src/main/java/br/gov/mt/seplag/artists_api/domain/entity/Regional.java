@@ -18,5 +18,7 @@ public class Regional extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String nome;
 
+    @Builder.Default
+    @Column(nullable = false)
     private Boolean ativo = true;
 }

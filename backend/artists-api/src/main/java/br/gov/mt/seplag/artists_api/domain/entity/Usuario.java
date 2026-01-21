@@ -25,5 +25,7 @@ public class Usuario extends BaseEntity {
     @Column(nullable = false)
     private String role;
 
+    @Builder.Default
+    @Column(nullable = false)
     private Boolean ativo = true;
 }
