@@ -3,8 +3,7 @@ package br.gov.mt.seplag.artists_api.mapper;
 import br.gov.mt.seplag.artists_api.api.dto.AlbumRequestDTO;
 import br.gov.mt.seplag.artists_api.api.dto.AlbumResponseDTO;
 import br.gov.mt.seplag.artists_api.domain.entity.Album;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface AlbumMapper {
@@ -13,4 +12,7 @@ public interface AlbumMapper {
     Album toEntity(AlbumRequestDTO dto);
 
     AlbumResponseDTO toResponse(Album entity);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntity(AlbumRequestDTO dto, @MappingTarget Album entity);
 }
