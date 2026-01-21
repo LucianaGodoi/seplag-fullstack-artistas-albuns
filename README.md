@@ -1,2 +1,1 @@
-# seplag-fullstack-artistas-albuns
-Sistema seletivo SEPLAG
+# Projeto Full Stack - Processo Seletivo SEPLAG
