@@ -1,44 +1,17 @@
-version: "3.8"
+version: "3.9"
 
 services:
-  db:
-    image: postgres:15
-    container_name: artists-db
+  postgres:
+    image: postgres:16
+    container_name: artists-postgres
     environment:
       POSTGRES_DB: artists
       POSTGRES_USER: artists
       POSTGRES_PASSWORD: artists
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
-
-  minio:
-    image: minio/minio
-    container_name: artists-minio
-    command: server /data --console-address ":9001"
-    environment:
-      MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: minio123
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - minio_data:/data
-
-  backend:
-    build: ./backend/artists-api
-    container_name: artists-api
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-      - minio
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/artists
-      SPRING_DATASOURCE_USERNAME: artists
-      SPRING_DATASOURCE_PASSWORD: artists
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  db_data:
-  minio_data:
+  postgres_data:
