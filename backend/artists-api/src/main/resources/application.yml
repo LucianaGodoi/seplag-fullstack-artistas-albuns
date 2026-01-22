@@ -22,3 +22,11 @@ management:
     web:
       exposure:
         include: health,info
+
+security:
+  jwt:
+    secret: "COLOQUE_UM_SECRET_FORTE_COM_32+_CHARS"
+    issuer: "artists-api"
+    access-token-minutes: 5
+    refresh-token-days: 7
+
