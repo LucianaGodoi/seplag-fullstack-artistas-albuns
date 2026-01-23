@@ -1,13 +1,19 @@
 package br.gov.mt.seplag.artists_api.api.controller;
 
+import br.gov.mt.seplag.artists_api.api.dto.AlbumImageResponseDTO;
 import br.gov.mt.seplag.artists_api.api.dto.AlbumRequestDTO;
 import br.gov.mt.seplag.artists_api.api.dto.AlbumResponseDTO;
 import br.gov.mt.seplag.artists_api.domain.service.AlbumService;
+import br.gov.mt.seplag.artists_api.domain.service.ImagemAlbumService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/albuns")
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class AlbumController {
 
     private final AlbumService albumService;
+    private final ImagemAlbumService imagemAlbumService;
 
     @PostMapping
     public ResponseEntity<AlbumResponseDTO> criar(@RequestBody AlbumRequestDTO dto) {
@@ -48,4 +55,22 @@ public class AlbumController {
         albumService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping(
+            value = "/{id}/capas",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public List<AlbumImageResponseDTO> uploadCapas(
+            @PathVariable Long id,
+            @RequestPart("files") List<MultipartFile> files
+    ) {
+        return imagemAlbumService.upload(id, files);
+    }
+
+
+    @GetMapping("/{id}/capas")
+    public List<AlbumImageResponseDTO> listarCapas(@PathVariable Long id) {
+        return imagemAlbumService.listar(id);
+    }
+
 }
