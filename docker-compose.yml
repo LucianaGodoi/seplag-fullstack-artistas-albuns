@@ -1,9 +1,21 @@
 version: "3.9"
 
+#services:
+#  postgres:
+#    image: postgres:16
+#    container_name: artists-postgres
+#    environment:
+#      POSTGRES_DB: artists
+#      POSTGRES_USER: artists
+#      POSTGRES_PASSWORD: artists
+#    ports:
+#      - "5433:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
 services:
-  postgres:
+  db:
     image: postgres:16
-    container_name: artists-postgres
+    container_name: artists-db
     environment:
       POSTGRES_DB: artists
       POSTGRES_USER: artists
@@ -11,7 +23,80 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:latest
+    container_name: artists-minio
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    command: server /data --console-address ":9001"
+    ports:
+      - "9100:9000"
+      - "9101:9001"
+    volumes:
+      - miniodata:/data
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: artists-minio-init
+    depends_on:
+      - minio
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+      MINIO_URL: http://minio:9000
+      MINIO_BUCKET: album-capas
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set local $$MINIO_URL $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD; do
+        echo 'waiting for minio...';
+        sleep 2;
+      done;
+      mc mb -p local/$$MINIO_BUCKET || true;
+      mc anonymous set download local/$$MINIO_BUCKET || true;
+      echo 'minio bucket ready';
+      "
+
+  api:
+    build:
+      context: ./backend/artists-api
+      dockerfile: Dockerfile
+    container_name: artists-api
+    depends_on:
+      - db
+      - minio
+      - minio-init
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/artists
+      SPRING_DATASOURCE_USERNAME: artists
+      SPRING_DATASOURCE_PASSWORD: artists
+
+      SECURITY_JWT_SECRET: "COLOQUE_UM_SECRET_FORTE_COM_32+_CHARS_AQUI_1234567890"
+      SECURITY_JWT_ISSUER: "artists-api"
+      SECURITY_JWT_ACCESS_TOKEN_MINUTES: "5"
+      SECURITY_JWT_REFRESH_TOKEN_DAYS: "7"
+
+      MINIO_URL: http://minio:9000
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+      MINIO_BUCKET: album-capas
+
+      APP_CORS_ALLOWED_ORIGINS: "http://localhost:5173"
+    ports:
+      - "8080:8080"
+
+#  frontend:
+#    build:
+#      context: ./frontend
+#      dockerfile: Dockerfile
+#    container_name: artists-frontend
+#    depends_on:
+#      - api
+#    ports:
+#      - "5173:5173"
 
 volumes:
-  postgres_data:
+  pgdata:
+  miniodata:

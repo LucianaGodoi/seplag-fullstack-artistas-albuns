@@ -1,0 +1,17 @@
+[33m0fd923d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m "feat(auth): implementar autenticação JWT com refresh token e rate limit
+[33m8881f5c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Implementa rate limit, integra com JWT, ajusta segurança e documenta no README
+[33m8ae1d06[m feat(security): autenticação JWT stateless com refresh token persistido, rotação e filtros de segurança
+[33mc316992[m Configurações iniciais: Flyway, entidades base e Swagger
+[33mb69f045[m feat: services e controllers REST para artistas e albuns
+[33m6b75fc9[m feat: domínio inicial com JPA entities, repositories e MapStruct
+[33md573a01[m feat: estrutura inicial do domínio com entidades JPA e repositories
+[33m2244e8b[m feat: configuração inicial do projeto com PostgreSQL, Flyway e Docker
+[33m3bc004a[m chore(api): Configuração dataSource e o flyway.
+[33m6437880[m chore(api): adicionando dockerfile
+[33m894b0e9[m chore: adicionado docker-compose com db e minio
+[33m530584b[m feat(api): spring boot initial project
+[33mcf71133[m Create docker-compose.yml
+[33m850cfa5[m Update README.md
+[33m3bf34e0[m Create .gitkeep
+[33mb380318[m Create .gitkeep
+[33mc6abde2[m Initial commit
