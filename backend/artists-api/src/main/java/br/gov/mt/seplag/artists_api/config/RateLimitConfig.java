@@ -30,7 +30,6 @@ public class RateLimitConfig {
                 "/swagger-ui.html",
                 "/actuator"
         );
-
         return new RateLimitFilter(rateLimitBuckets, 10, excluded);
     }
 }
