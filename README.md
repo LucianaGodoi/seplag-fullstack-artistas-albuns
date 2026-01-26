@@ -55,7 +55,7 @@ Todos os serviços são orquestrados via **Docker Compose**.
 ---
 
 ## 📦 Estrutura do Projeto (Back-end)
-
+```md
 src/main/java
 ├── api
 │ ├── controller
@@ -67,8 +67,7 @@ src/main/java
 │ └── service
 ├── mapper
 └── util
-
-
+```
 ---
 
 ## 🔐 Segurança
