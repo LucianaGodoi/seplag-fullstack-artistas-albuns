@@ -4,11 +4,11 @@ import type { LoginRequest } from "../../modules/auth/services/AuthService";
 
 class AuthFacade {
 
-    private userSubject = new BehaviorSubject<boolean>(
+    private authenticatedSubject = new BehaviorSubject<boolean>(
         !!localStorage.getItem("accessToken")
     );
 
-    user$ = this.userSubject.asObservable();
+    authenticated$ = this.authenticatedSubject.asObservable();
 
     async login(data: LoginRequest) {
         const result = await AuthService.login(data);
@@ -16,12 +16,12 @@ class AuthFacade {
         localStorage.setItem("accessToken", result.accessToken);
         localStorage.setItem("refreshToken", result.refreshToken);
 
-        this.userSubject.next(true);
+        this.authenticatedSubject.next(true);
     }
 
     logout() {
         localStorage.clear();
-        this.userSubject.next(false);
+        this.authenticatedSubject.next(false);
     }
 
     isAuthenticated(): boolean {

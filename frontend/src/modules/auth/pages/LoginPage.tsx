@@ -1,17 +1,24 @@
-import { useState } from 'react';
-import { authFacade } from '../../../app/facades/auth.facade';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import authFacade from "../../../app/facades/AuthFacade";
 
 export default function LoginPage() {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     async function handleLogin() {
         try {
-            await authFacade.login(username, password);
-            alert('Login realizado com sucesso!');
+            await authFacade.login({
+                username,
+                password
+            });
+
+            navigate("/");
         } catch {
-            alert('Erro ao logar');
+            alert("Erro ao logar");
         }
     }
 
