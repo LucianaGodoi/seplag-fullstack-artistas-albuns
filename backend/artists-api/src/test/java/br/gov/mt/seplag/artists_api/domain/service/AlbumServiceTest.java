@@ -33,6 +33,9 @@ class AlbumServiceTest {
     @Mock
     private AlbumMapper albumMapper;
 
+    @Mock
+    private NotificationService notificationService;
+
     @InjectMocks
     private AlbumService albumService;
 
@@ -83,6 +86,10 @@ class AlbumServiceTest {
 
         when(albumMapper.toResponse(any()))
                 .thenReturn(responseDTO);
+
+        doNothing()
+                .when(notificationService)
+                .notificarNovoAlbum(any());
 
         AlbumResponseDTO result = albumService.criar(requestDTO);
 
