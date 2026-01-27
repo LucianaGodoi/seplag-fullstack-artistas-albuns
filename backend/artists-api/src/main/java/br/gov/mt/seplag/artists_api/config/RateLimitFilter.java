@@ -57,6 +57,11 @@ public class RateLimitFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String path = request.getRequestURI();
+        if (path.startsWith("/ws")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         for (String prefix : excludedPrefixes) {
             if (path.startsWith(prefix)) {
                 chain.doFilter(request, response);
