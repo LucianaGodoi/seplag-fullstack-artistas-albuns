@@ -1,17 +1,5 @@
 version: "3.9"
 
-#services:
-#  postgres:
-#    image: postgres:16
-#    container_name: artists-postgres
-#    environment:
-#      POSTGRES_DB: artists
-#      POSTGRES_USER: artists
-#      POSTGRES_PASSWORD: artists
-#    ports:
-#      - "5433:5432"
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
 services:
   db:
     image: postgres:16
@@ -83,7 +71,7 @@ services:
       MINIO_SECRET_KEY: minio123
       MINIO_BUCKET: album-capas
 
-      APP_CORS_ALLOWED_ORIGINS: "http://localhost:5173"
+      APP_CORS_ALLOWED_ORIGINS: http://localhost:5173,http://localhost:5174"
     ports:
       - "8080:8080"
 

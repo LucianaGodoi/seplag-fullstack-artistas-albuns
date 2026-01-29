@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "../../modules/auth/pages/LoginPage";
-import PrivateRoute from "./PrivateRoute";
+import ArtistsListPage from "../../modules/artistas/pages/ArtistsListPage";
+import ArtistDetailPage from "../../modules/artistas/pages/ArtistDetailPage";
 
-function Home() {
-    return <h2>Home</h2>;
-}
+import PrivateRoute from "./PrivateRoute";
 
 export default function AppRoutes() {
     return (
@@ -12,12 +11,12 @@ export default function AppRoutes() {
             <Routes>
 
                 <Route path="/login" element={<LoginPage />} />
-
+                <Route path="/artistas/:id" element={<ArtistDetailPage />} />
                 <Route
                     path="/"
                     element={
                         <PrivateRoute>
-                            <Home />
+                            <ArtistsListPage />
                         </PrivateRoute>
                     }
                 />
