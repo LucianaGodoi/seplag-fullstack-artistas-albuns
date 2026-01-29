@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ArtistaService from "../services/ArtistaService";
 import type { Artista } from "../services/ArtistaService";
 import { useNavigate } from "react-router-dom";
+import "./ArtistsListPage.css";
 
 export default function ArtistsListPage() {
 
@@ -29,9 +30,15 @@ export default function ArtistsListPage() {
     }
 
     return (
+
         <div style={{ padding: 40 }}>
             <h2>Artistas</h2>
-
+            <button
+                className="btn-primary"
+                onClick={() => navigate("/artistas/novo")}
+            >
+                + Novo Artista
+            </button>
             {artistas.length === 0 && <p>Nenhum artista encontrado.</p>}
 
             <ul>

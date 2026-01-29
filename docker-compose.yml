@@ -66,7 +66,7 @@ services:
       SECURITY_JWT_ACCESS_TOKEN_MINUTES: "5"
       SECURITY_JWT_REFRESH_TOKEN_DAYS: "7"
 
-      MINIO_URL: http://minio:9000
+      MINIO_URL: http://localhost:9100
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: minio123
       MINIO_BUCKET: album-capas
