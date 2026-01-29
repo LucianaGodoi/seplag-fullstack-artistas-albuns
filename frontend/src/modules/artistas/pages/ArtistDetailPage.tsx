@@ -9,13 +9,16 @@ interface Artista {
     nome: string;
 }
 
+interface AlbumCover {
+    id: number;
+    url: string;
+}
+
 interface Album {
     id: number;
     nome: string;
-    anoLancamento: number;
-    capas?: {
-        url: string;
-    }[];
+    anoLancamento: number | null;
+    capas?: AlbumCover[];
 }
 
 export default function ArtistDetailPage() {
@@ -51,6 +54,7 @@ export default function ArtistDetailPage() {
 
             <div className="album-grid">
                 {albuns.map(album => {
+                    console.log(album);
                     const capa = album.capas?.[0]?.url;
                     return (
                         <div key={album.id} className="album-card">

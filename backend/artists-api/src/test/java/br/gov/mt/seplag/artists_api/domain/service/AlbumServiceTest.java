@@ -39,6 +39,9 @@ class AlbumServiceTest {
     @InjectMocks
     private AlbumService albumService;
 
+    @Mock
+    private MinioService minioService;
+
     private Artista artista;
     private Album album;
     private AlbumRequestDTO requestDTO;
@@ -84,7 +87,7 @@ class AlbumServiceTest {
         when(albumRepository.save(any()))
                 .thenReturn(album);
 
-        when(albumMapper.toResponse(any()))
+        when(albumMapper.toResponse(any(), any()))
                 .thenReturn(responseDTO);
 
         doNothing()
@@ -117,7 +120,7 @@ class AlbumServiceTest {
         when(albumRepository.findAll(any(Pageable.class)))
                 .thenReturn(page);
 
-        when(albumMapper.toResponse(album))
+        when(albumMapper.toResponse(album, minioService))
                 .thenReturn(responseDTO);
 
         Page<AlbumResponseDTO> result =
@@ -133,7 +136,7 @@ class AlbumServiceTest {
         when(albumRepository.findByArtistaId(eq(1L), any(Pageable.class)))
                 .thenReturn(page);
 
-        when(albumMapper.toResponse(album))
+        when(albumMapper.toResponse(album, minioService))
                 .thenReturn(responseDTO);
 
         Page<AlbumResponseDTO> result =
@@ -149,7 +152,7 @@ class AlbumServiceTest {
         when(albumRepository.findById(10L))
                 .thenReturn(Optional.of(album));
 
-        when(albumMapper.toResponse(album))
+        when(albumMapper.toResponse(album, minioService))
                 .thenReturn(responseDTO);
 
         AlbumResponseDTO result = albumService.buscarPorId(10L);
@@ -176,7 +179,7 @@ class AlbumServiceTest {
         when(albumRepository.save(album))
                 .thenReturn(album);
 
-        when(albumMapper.toResponse(album))
+        when(albumMapper.toResponse(album, minioService))
                 .thenReturn(responseDTO);
 
         AlbumResponseDTO result =
