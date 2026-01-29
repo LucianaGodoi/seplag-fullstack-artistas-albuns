@@ -22,6 +22,7 @@ public class AlbumService {
     private final ArtistaRepository artistaRepository;
     private final AlbumMapper albumMapper;
     private final NotificationService notificationService;
+    private final MinioService minioService;
 
     public AlbumResponseDTO criar(AlbumRequestDTO dto) {
 
@@ -41,7 +42,7 @@ public class AlbumService {
                         LocalDateTime.now()
                 )
         );
-        return albumMapper.toResponse(salvo);
+        return albumMapper.toResponse(salvo, minioService);
     }
 
     public Page<AlbumResponseDTO> listar(Long artistaId, int page, int size) {
@@ -49,17 +50,17 @@ public class AlbumService {
 
         if (artistaId != null) {
             return albumRepository.findByArtistaId(artistaId, pageable)
-                    .map(albumMapper::toResponse);
+                    .map(album -> albumMapper.toResponse(album, minioService));
         }
 
         return albumRepository.findAll(pageable)
-                .map(albumMapper::toResponse);
+                .map(album -> albumMapper.toResponse(album, minioService));
     }
 
     public AlbumResponseDTO buscarPorId(Long id) {
         Album album = albumRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
-        return albumMapper.toResponse(album);
+        return albumMapper.toResponse(album, minioService);
     }
 
     public AlbumResponseDTO atualizar(Long id, AlbumRequestDTO dto) {
@@ -67,7 +68,7 @@ public class AlbumService {
                 .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
 
         albumMapper.updateEntity(dto, album);
-        return albumMapper.toResponse(albumRepository.save(album));
+        return albumMapper.toResponse(albumRepository.save(album), minioService);
     }
 
     public void deletar(Long id) {

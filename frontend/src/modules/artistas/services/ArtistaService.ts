@@ -13,12 +13,19 @@ class ArtistaService {
         nome?: string;
         sort?: string;
     }) {
+
         const { data } = await api.get("/artistas", {
-            params
+            params: {
+                page: params?.page ?? 0,
+                size: params?.size ?? 50,
+                nome: params?.nome,
+                sort: params?.sort
+            }
         });
 
         return data;
     }
+
 
     async buscarPorId(id: number) {
         const { data } = await api.get(`/artistas/${id}`);
