@@ -10,20 +10,7 @@ type Props = {
 };
 
 export function AlbumCard({ album }: Props) {
-   // const capa = album.capas?.[0]?.url;
-
     return (
-        // <div className="album-card">
-        //     {capa ? (
-        //         <img src={capa} alt={album.titulo} />
-        //     ) : (
-        //         <div className="no-cover">Sem Capa</div>
-        //     )}
-        //
-        //     <strong>{album.titulo}</strong>
-        //     <span>{album.anoLancamento}</span>
-        // </div>
-
         <div className="album-card">
 
             <div className="album-cover">

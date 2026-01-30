@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ArtistaService from "../services/ArtistaService.ts";
 import AlbumService from "../../albuns/services/AlbumService";
 import "./ArtistDetailPage.css";
@@ -26,6 +27,7 @@ export default function ArtistDetailPage() {
     const { id } = useParams();
     const [artista, setArtista] = useState<Artista | null>(null);
     const [albuns, setAlbuns] = useState<Album[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         carregarDados();
@@ -45,7 +47,11 @@ export default function ArtistDetailPage() {
     return (
         <div style={{ padding: 40 }}>
             <h2>{artista?.nome}</h2>
-
+            <button
+                onClick={() => navigate(`/albuns/novo?artistaId=${artista?.id}`)}
+            >
+                + Novo Álbum
+            </button>
             <h3>Álbuns</h3>
 
             {albuns.length === 0 && (

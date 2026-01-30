@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 import AlbumService from "../services/AlbumService";
 import ArtistaService from "../../artistas/services/ArtistaService";
 
@@ -18,18 +18,73 @@ export default function AlbumCreatePage() {
     const [artistas, setArtistas] = useState<Artista[]>([]);
     const [files, setFiles] = useState<File[]>([]);
     const [loading, setLoading] = useState(false);
+    const [searchParams] = useSearchParams();
+    const [artistaNome, setArtistaNome] = useState<string>();
+
+
+
+    // useEffect(() => {
+    //     carregarArtistas();
+    // }, []);
+    //
+    // useEffect(() => {
+    //     const id = searchParams.get("artistaId");
+    //
+    //     if (id) {
+    //         setArtistaId(Number(id));
+    //     }
+    // }, []);
 
     useEffect(() => {
-        carregarArtistas();
+        async function init() {
+            const id = searchParams.get("artistaId");
+
+            if (id) {
+                const artistaIdNum = Number(id);
+                setArtistaId(artistaIdNum);
+
+                const data = await ArtistaService.listar({ page: 0, size: 100 });
+                setArtistas(data.content);
+
+                const artista = data.content.find(
+                    (a: Artista) => a.id === artistaIdNum
+                );
+
+                if (artista) {
+                    setArtistaNome(artista.nome);
+                }
+            } else {
+                const data = await ArtistaService.listar({ page: 0, size: 100 });
+                setArtistas(data.content);
+            }
+        }
+
+        init();
     }, []);
 
-    async function carregarArtistas() {
-        const data = await ArtistaService.listar({ page: 0, size: 100 });
-        setArtistas(data.content);
-    }
+
+    // async function carregarArtistas() {
+    //     const data = await ArtistaService.listar({ page: 0, size: 100 });
+    //     setArtistas(data.content);
+    //     const id = searchParams.get("artistaId");
+    //
+    //     if (id) {
+    //         const artista = data.content.find(
+    //             (a: Artista) => a.id === Number(id)
+    //         );
+    //
+    //         if (artista) {
+    //             setArtistaNome(artista.nome);
+    //         }
+    //     }
+    // }
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
+        if (!artistaId) {
+            alert("Artista não informado");
+            return;
+        }
         setLoading(true);
 
         try {
@@ -45,7 +100,7 @@ export default function AlbumCreatePage() {
             }
 
             alert("Álbum cadastrado com sucesso!");
-            navigate("/artistas");
+            navigate(`/artistas/${artistaId}`);
 
         } catch (err) {
             alert("Erro ao cadastrar álbum");
@@ -76,18 +131,26 @@ export default function AlbumCreatePage() {
                     required
                 />
 
-                <select
-                    value={artistaId}
-                    onChange={e => setArtistaId(Number(e.target.value))}
-                    required
-                >
-                    <option value="">Selecione um artista</option>
-                    {artistas.map(a => (
-                        <option key={a.id} value={a.id}>
-                            {a.nome}
-                        </option>
-                    ))}
-                </select>
+                {artistaId ? (
+                    <div style={{ marginBottom: 12 }}>
+                        <strong>Artista:</strong> {artistaNome}
+                    </div>
+                ) : (
+                    <select
+                        value={artistaId}
+                        onChange={e => setArtistaId(Number(e.target.value))}
+                        required
+                    >
+                        <option value="">Selecione um artista</option>
+
+                        {artistas.map(a => (
+                            <option key={a.id} value={a.id}>
+                                {a.nome}
+                            </option>
+                        ))}
+                    </select>
+                )}
+
 
                 <input
                     type="file"
