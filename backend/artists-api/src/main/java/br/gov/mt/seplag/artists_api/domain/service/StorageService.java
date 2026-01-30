@@ -5,6 +5,7 @@ import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.http.Method;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -43,8 +44,8 @@ public class StorageService {
 
     public String presignedGetUrl(String objectKey, Duration expiry) {
         try {
-            int seconds = (int) Math.min(expiry.getSeconds(), 60L * 60L); // hard cap 1h
-            return minio.getPresignedObjectUrl(
+            int seconds = (int) Math.min(expiry.getSeconds(), 60L * 60L);
+            String url = minio.getPresignedObjectUrl(
                     GetPresignedObjectUrlArgs.builder()
                             .method(Method.GET)
                             .bucket(props.getBucket())
@@ -52,8 +53,14 @@ public class StorageService {
                             .expiry(seconds)
                             .build()
             );
+            String internal = props.getInternalUrl().replaceAll("/$", "");
+            String external = props.getPublicUrl().replaceAll("/$", "");
+            String finalUrl = url.replace(internal, external);
+            return url.replace(internal, external);
+
         } catch (Exception e) {
             throw new RuntimeException("Falha ao gerar presigned URL", e);
         }
     }
+
 }

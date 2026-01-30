@@ -12,8 +12,9 @@ public class MinioConfig {
     @Bean
     public MinioClient minioClient(MinioProperties props) {
         return MinioClient.builder()
-                .endpoint(props.getUrl())
+                .endpoint(props.getInternalUrl())
                 .credentials(props.getAccessKey(), props.getSecretKey())
                 .build();
     }
+
 }

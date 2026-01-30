@@ -31,6 +31,12 @@ class ArtistaService {
         const { data } = await api.get(`/artistas/${id}`);
         return data;
     }
+
+    async criar(payload: { nome: string }) {
+        const { data } = await api.post("/artistas", payload);
+        return data;
+    }
+
 }
 
 export default new ArtistaService();

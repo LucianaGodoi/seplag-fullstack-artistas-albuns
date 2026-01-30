@@ -8,17 +8,8 @@ import br.gov.mt.seplag.artists_api.domain.service.MinioService;
 import org.mapstruct.*;
 
 import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface AlbumMapper {
-
-//    @Mapping(target = "artista", ignore = true)
-//    Album toEntity(AlbumRequestDTO dto);
-//
-//    AlbumResponseDTO toResponse(Album entity);
-//
-//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-//    void updateEntity(AlbumRequestDTO dto, @MappingTarget Album entity);
 @Mapping(target = "artista", ignore = true)
 Album toEntity(AlbumRequestDTO dto);
 
@@ -37,7 +28,7 @@ Album toEntity(AlbumRequestDTO dto);
                         .stream()
                         .map(img -> new AlbumCoverResponseDTO(
                                 img.getId(),
-                                minioService.gerarPresignedUrl(img.getObjectKey())
+                                minioService.gerarUrlPublica(img.getObjectKey())
                         ))
                         .toList();
 
