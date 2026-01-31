@@ -27,6 +27,14 @@ class AuthFacade {
     isAuthenticated(): boolean {
         return !!localStorage.getItem("accessToken");
     }
+
+    getAccessToken() {
+        return localStorage.getItem("accessToken");
+    }
+
+    getRefreshToken() {
+        return localStorage.getItem("refreshToken");
+    }
 }
 
 export default new AuthFacade();
