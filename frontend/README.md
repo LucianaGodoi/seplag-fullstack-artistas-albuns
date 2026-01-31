@@ -1,73 +1,116 @@
-# React + TypeScript + Vite
+# Front-end – Gerenciamento de Artistas e Álbuns
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação Front-end desenvolvida em React + TypeScript para consumo da API do projeto Gerenciamento de Artistas e Álbuns, criado como Prova Prática Full Stack Sênior – Java + React conforme edital da SEPLAG – Governo do Estado de Mato Grosso.
 
-Currently, two official plugins are available:
+A interface permite autenticação, listagem de artistas, visualização de álbuns, cadastro de novos álbuns e upload de capas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Objetivo
 
-## React Compiler
+Fornecer uma interface web moderna, responsiva e intuitiva para:
+- Autenticação de usuários
+- Listagem de artistas
+- Visualização de álbuns por artista
+- Cadastro de álbuns
+- Upload de capas
+- Consumo de notificações via WebSocket
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias Utilizadas
+- React 18
+- TypeScript
+- Vite
+- React Router DOM
+- Axios
+- CSS Modules / CSS puro
+- WebSocket (SockJS + STOMP)
+- ESLint
 
-## Expanding the ESLint configuration
+## Arquitetura
+Estrutura baseada em módulos e separação de responsabilidades:
+```text
+src
+├── app
+│   └── routes
+├── components
+├── modules
+│   ├── artistas
+│   └── albuns
+├── services
+└── styles
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```
+## Integração com Back-end
+```arduino
+http://localhost:8080
+```
+Endpoints principais:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- POST /api/v1/auth/login
+- GET /api/v1/artistas
+- GET /api/v1/albuns?artistaId=
+- POST /api/v1/albuns
+- POST /api/v1/albuns/{id}/capas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Autenticação
+- Login via JWT
+- Access Token armazenado no localStorage
+- Token enviado automaticamente no header:
+```text
+Authorization: Bearer <token>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Upload de Capas
+- Upload múltiplo de imagens
+- Pré-visualização automática
+- Capas exibidas na tela de detalhe do artista
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Notificações em Tempo Real
+O front conecta ao WebSocket:
+```bash
+http://localhost:8080/ws
 ```
+Canal:
+```bash
+/topic/albuns
+```
+Sempre que um álbum é criado, o usuário recebe notificação automática.
+
+## Executar o Projeto
+Pré-requisitos
+- Node.js 18+
+- NPM ou Yarn
+- Back-end em execução
+- 
+ Instalação
+```bash
+npm install
+```
+Executar
+```bash
+npm run dev
+```
+Acessar
+```bash
+http://localhost:5173
+```
+## Variáveis de Ambiente (opcional)
+Arquivo .env:
+```env
+VITE_API_URL=http://localhost:8080
+```
+## Telas Principais
+- Login
+- Listagem de artistas
+- Detalhe do artista com álbuns
+- Cadastro de álbum
+
+## Boas Práticas Aplicadas
+- Componentização
+- Tipagem forte com TypeScript
+- Separação de módulos
+- Reutilização de serviços
+- Tratamento de erros
+- Organização por responsabilidade
+
+## Observações
+
+Este front-end foi desenvolvido com foco em clareza, simplicidade e aderência aos requisitos funcionais do projeto, priorizando integração correta com o back-end e boa experiência de uso.
