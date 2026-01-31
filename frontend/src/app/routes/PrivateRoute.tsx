@@ -1,16 +1,13 @@
 import { Navigate } from "react-router-dom";
-import authFacade from "../../app/facades/AuthFacade";
-import React from "react";
+import { useAuth } from "../../modules/auth/context/AuthContext";
+import type {JSX} from "react";
 
-interface Props {
-    children: React.ReactNode;
-}
+export default function PrivateRoute({ children }: { children: JSX.Element }) {
+    const { isAuthenticated } = useAuth();
 
-export default function PrivateRoute({ children }: Props) {
-
-    if (!authFacade.isAuthenticated()) {
-        return <Navigate to="/login" replace />;
+    if (!isAuthenticated) {
+        return <Navigate to="/login" />;
     }
 
-    return <>{children}</>;
+    return children;
 }

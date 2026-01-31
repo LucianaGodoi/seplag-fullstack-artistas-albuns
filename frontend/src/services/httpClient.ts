@@ -1,15 +1,17 @@
 import axios from "axios";
+import AuthService from "../modules/auth/services/AuthService";
+import TokenStorage from "../modules/auth/services/TokenStorage";
 
 const httpClient = axios.create({
     baseURL: "http://localhost:8080/api/v1",
     headers: {
-        "Content-Type": "application/json",
-    },
+        "Content-Type": "application/json"
+    }
 });
 
-// Interceptor Request: injeta token
-httpClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem("accessToken");
+// REQUEST
+httpClient.interceptors.request.use(config => {
+    const token = TokenStorage.getAccessToken();
 
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
@@ -18,16 +20,30 @@ httpClient.interceptors.request.use((config) => {
     return config;
 });
 
-// Interceptor Response: trata expiração
+// RESPONSE
 httpClient.interceptors.response.use(
     response => response,
+
     async error => {
         if (error.response?.status === 401) {
-            localStorage.clear();
-            window.location.href = "/login";
+            try {
+                await AuthService.refresh();
+
+                const token = TokenStorage.getAccessToken();
+                error.config.headers.Authorization = `Bearer ${token}`;
+
+                return httpClient(error.config);
+
+            } catch {
+                AuthService.logout();
+                window.location.href = "/login";
+            }
         }
+
         return Promise.reject(error);
     }
 );
 
 export default httpClient;
+
+

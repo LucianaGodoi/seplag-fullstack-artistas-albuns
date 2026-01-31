@@ -210,6 +210,17 @@ s1.onload=()=> {
 };
 
 ```
+### Teste de Autenticação
+
+1. Realizar login com usuário admin
+2. Validar tokens no LocalStorage
+3. Remover manualmente accessToken
+4. Recarregar página
+5. Sistema realiza refresh automático
+6. Novo token é gerado sem logout
+
+Fluxo validado com sucesso.
+
 ##  Observações Finais
 
 Este projeto foi desenvolvido priorizando:
