@@ -71,15 +71,15 @@ services:
     ports:
       - "8080:8080"
 
-#  frontend:
-#    build:
-#      context: ./frontend
-#      dockerfile: Dockerfile
-#    container_name: artists-frontend
-#    depends_on:
-#      - api
-#    ports:
-#      - "5173:5173"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: artists-frontend
+    depends_on:
+      - api
+    ports:
+      - "5173:5173"
 
 volumes:
   pgdata:

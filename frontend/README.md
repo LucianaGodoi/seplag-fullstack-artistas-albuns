@@ -112,5 +112,8 @@ VITE_API_URL=http://localhost:8080
 - Organização por responsabilidade
 
 ## Observações
+O frontend utiliza variáveis de ambiente para definição dinâmica da URL da API, permitindo execução local e em containers sem alteração de código.
+
+O rate limit está configurado para 10 requisições por minuto por usuário. Durante testes locais, múltiplos refreshes consecutivos podem retornar 429 (Too Many Requests), comportamento esperado conforme configuração.
 
 Este front-end foi desenvolvido com foco em clareza, simplicidade e aderência aos requisitos funcionais do projeto, priorizando integração correta com o back-end e boa experiência de uso.
