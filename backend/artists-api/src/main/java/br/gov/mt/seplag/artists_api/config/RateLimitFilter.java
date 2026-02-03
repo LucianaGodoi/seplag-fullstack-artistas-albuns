@@ -22,18 +22,31 @@ public class RateLimitFilter extends OncePerRequestFilter {
     private final ConcurrentMap<String, Bucket> buckets;
     private final int requestsPerMinute;
     private final Set<String> excludedPrefixes;
+    private final boolean enabled;
 
     public RateLimitFilter(
             ConcurrentMap<String, Bucket> buckets,
             int requestsPerMinute,
+            boolean enabled,
             Set<String> excludedPrefixes
     ) {
         this.buckets = buckets;
         this.requestsPerMinute = requestsPerMinute;
+        this.enabled = enabled;
         this.excludedPrefixes = excludedPrefixes;
     }
 
     private Bucket newBucket() {
+        if (!enabled) {
+            return Bucket.builder()
+                    .addLimit(
+                            Bandwidth.classic(
+                                    Long.MAX_VALUE,
+                                    Refill.greedy(Long.MAX_VALUE, Duration.ofMinutes(1))
+                            )
+                    )
+                    .build();
+        }
         Bandwidth limit = Bandwidth.classic(
                 requestsPerMinute,
                 Refill.intervally(requestsPerMinute, Duration.ofMinutes(1))
@@ -76,8 +89,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-
         response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
-        response.getWriter().write("Rate limit exceeded (" + requestsPerMinute + " req/min).");
+        response.getWriter().write("Limite de requisições excedido (" + requestsPerMinute + " requisições por minuto).");
     }
 }

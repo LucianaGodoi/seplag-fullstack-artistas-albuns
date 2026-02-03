@@ -3,6 +3,7 @@ package br.gov.mt.seplag.artists_api.config;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import io.github.bucket4j.Bucket;
 import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
@@ -12,12 +13,18 @@ import java.util.concurrent.ConcurrentMap;
 @Configuration
 public class RateLimitConfig {
 
+    @Value("${rate.limit.enabled}")
+    private boolean enabled;
+
+    @Value("${rate.limit.requests.per.minute}")
+    private int requestsPerMinute;
+
     @Bean
     public ConcurrentMap<String, Bucket> rateLimitBuckets() {
         return Caffeine.newBuilder()
                 .expireAfterAccess(Duration.ofMinutes(30))
                 .maximumSize(50_000)
-                .<String, Bucket>build() //força o cache ser do tipo certo
+                .<String, Bucket>build()
                 .asMap();
     }
 
@@ -30,6 +37,11 @@ public class RateLimitConfig {
                 "/swagger-ui.html",
                 "/actuator"
         );
-        return new RateLimitFilter(rateLimitBuckets, 10, excluded);
+        return new RateLimitFilter(
+                rateLimitBuckets,
+                requestsPerMinute,
+                enabled,
+                excluded
+        );
     }
 }

@@ -19,7 +19,7 @@ Thumbs.db
 .mvn/
 
 # Env
-.env
+frontend/.env
 .env.*
 
 # Docker volumes (se usar local)

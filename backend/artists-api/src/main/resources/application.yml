@@ -51,3 +51,13 @@ management:
       enabled: true
     readinessstate:
       enabled: true
+
+rate:
+  limit:
+    enabled: ${RATE_LIMIT_ENABLED:true}
+    requests:
+      per:
+        minute: ${RATE_LIMIT_REQUESTS_PER_MINUTE:10}
+
+
+
