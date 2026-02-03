@@ -92,7 +92,7 @@ Acessar
 ```bash
 http://localhost:5173
 ```
-## Variáveis de Ambiente (opcional)
+## Variáveis de Ambiente 
 Arquivo .env:
 ```env
 VITE_API_URL=http://localhost:8080

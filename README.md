@@ -138,6 +138,63 @@ Credenciais padrão:
 - Usuário: admin
 - Senha: admin123
 ```
+## Variáveis de Ambiente
+O projeto utiliza variáveis de ambiente para configurar serviços e comportamento da aplicação.
+Crie um arquivo chamado:
+```bash
+.env.example
+```
+Na raiz do projeto, com o seguinte conteúdo:
+```env
+# ============================
+# FRONTEND
+# ============================
+VITE_API_URL=http://artists-api:8080/api/v1
+
+# ============================
+# RATE LIMIT
+# ============================
+RATE_LIMIT_ENABLED=true
+RATE_LIMIT_REQUESTS_PER_MINUTE=10
+```
+Para uso local, copie:
+```bash
+cp .env.example .env
+```
+E ajuste os valores conforme necessidade.
+
+## Rate Limit (Limite de Requisições)
+A API possui controle de limite de requisições utilizando Bucket4j.
+Configuração padrão:
+- 10 requisições por minuto por usuário autenticado
+- Quando não autenticado, o controle é por IP
+
+Mensagem retornada ao exceder o limite:
+```md
+Limite de requisições excedido (X requisições por minuto).
+```
+### Configuração por ambiente
+O comportamento pode ser alterado via variáveis:
+```env
+RATE_LIMIT_ENABLED=true
+RATE_LIMIT_REQUESTS_PER_MINUTE=20
+```
+Para desabilitar completamente em desenvolvimento:
+```env
+RATE_LIMIT_ENABLED=false
+```
+Isso evita bloqueios durante testes intensivos.
+
+## Variáveis no Docker Compose
+O Docker Compose carrega automaticamente as variáveis do arquivo .env localizado na raiz do projeto.
+Exemplo:
+```yaml
+api:
+  env_file:
+    - .env
+```
+Dessa forma, não é necessário duplicar valores diretamente no docker-compose.yml.
+
 ##  Como Executar Localmente
 
 ### Pré-requisitos
