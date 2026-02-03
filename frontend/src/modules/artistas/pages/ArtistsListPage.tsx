@@ -72,16 +72,19 @@ export default function ArtistsListPage() {
             </button>
             {artistas.length === 0 && <p>Nenhum artista encontrado.</p>}
 
-            <ul>
+            <div className="artists-grid">
                 {artistas.map(artista => (
-                    <li
-                        style={{cursor: "pointer"}}
+                    <div
+                        key={artista.id}
+                        className="artist-card"
                         onClick={() => navigate(`/artistas/${artista.id}`)}
                     >
-                        {artista.nome}
-                    </li>
+                        <h3>{artista.nome}</h3>
+                        <p>{artista.totalAlbuns ?? 0} álbuns</p>
+                    </div>
                 ))}
-            </ul>
+            </div>
+
             <div className="pagination">
                 <button
                     disabled={page === 0}
