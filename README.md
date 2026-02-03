@@ -166,6 +166,26 @@ docker compose up -d --build
 O usuário administrador (admin) é criado automaticamente via Flyway.
 
 ---
+## Health Check, Liveness e Readiness
+
+A API expõe endpoints de monitoramento utilizando Spring Boot Actuator:
+
+- Health:
+  http://localhost:8080/actuator/health
+
+- Liveness:
+  http://localhost:8080/actuator/health/liveness
+
+- Readiness:
+  http://localhost:8080/actuator/health/readiness
+
+Esses endpoints permitem verificar:
+
+- Se a aplicação está viva (liveness)
+- Se está pronta para receber tráfego (readiness)
+- Estado geral da aplicação e dependências (health)
+
+Os endpoints estão liberados de autenticação.
 
 ## WebSocket – Notificação de Novo Álbum
 Sempre que um novo álbum é criado, todos os clientes conectados recebem notificação em tempo real.
