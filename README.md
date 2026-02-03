@@ -221,6 +221,10 @@ s1.onload=()=> {
 
 Fluxo validado com sucesso.
 
+## Histórico de Desenvolvimento
+
+O projeto foi desenvolvido de forma incremental e posteriormente organizado em commits semânticos (Conventional Commits) para facilitar a revisão e compreensão da evolução das funcionalidades.
+
 ##  Observações Finais
 
 Este projeto foi desenvolvido priorizando:

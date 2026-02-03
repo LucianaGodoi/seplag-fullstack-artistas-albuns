@@ -6,7 +6,7 @@ export default function App() {
 
     useEffect(() => {
         connectWebSocket((msg) => {
-            alert(`🎵 Novo álbum cadastrado: ${msg.albumNome} - ${msg.artistaNome}`);
+            alert(`Novo álbum cadastrado: ${msg.albumNome} - ${msg.artistaNome}`);
         });
     }, []);
 

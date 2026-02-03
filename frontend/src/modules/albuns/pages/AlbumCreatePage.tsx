@@ -21,20 +21,6 @@ export default function AlbumCreatePage() {
     const [searchParams] = useSearchParams();
     const [artistaNome, setArtistaNome] = useState<string>();
 
-
-
-    // useEffect(() => {
-    //     carregarArtistas();
-    // }, []);
-    //
-    // useEffect(() => {
-    //     const id = searchParams.get("artistaId");
-    //
-    //     if (id) {
-    //         setArtistaId(Number(id));
-    //     }
-    // }, []);
-
     useEffect(() => {
         async function init() {
             const id = searchParams.get("artistaId");
@@ -61,23 +47,6 @@ export default function AlbumCreatePage() {
 
         init();
     }, []);
-
-
-    // async function carregarArtistas() {
-    //     const data = await ArtistaService.listar({ page: 0, size: 100 });
-    //     setArtistas(data.content);
-    //     const id = searchParams.get("artistaId");
-    //
-    //     if (id) {
-    //         const artista = data.content.find(
-    //             (a: Artista) => a.id === Number(id)
-    //         );
-    //
-    //         if (artista) {
-    //             setArtistaNome(artista.nome);
-    //         }
-    //     }
-    // }
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();

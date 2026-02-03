@@ -110,6 +110,11 @@ VITE_API_URL=http://localhost:8080
 - Reutilização de serviços
 - Tratamento de erros
 - Organização por responsabilidade
+- 
+## Histórico de Desenvolvimento
+
+O projeto foi desenvolvido de forma incremental e posteriormente organizado em commits semânticos (Conventional Commits) para facilitar a revisão e compreensão da evolução das funcionalidades.
+
 
 ## Observações
 O frontend utiliza variáveis de ambiente para definição dinâmica da URL da API, permitindo execução local e em containers sem alteração de código.
