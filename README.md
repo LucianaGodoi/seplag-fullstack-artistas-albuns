@@ -187,6 +187,23 @@ Esses endpoints permitem verificar:
 
 Os endpoints estão liberados de autenticação.
 
+## Sincronização de Regionais
+
+A API consome o endpoint externo:
+
+https://integrador-argus-api.geia.vip/v1/regionais
+
+Regras aplicadas:
+
+- Novo no endpoint -> inserido
+- Não disponível no endpoint -> inativado
+- Nome alterado -> registro anterior inativado e novo inserido
+
+Endpoint para sincronização:
+
+POST /api/v1/regionais/sync
+
+
 ## WebSocket – Notificação de Novo Álbum
 Sempre que um novo álbum é criado, todos os clientes conectados recebem notificação em tempo real.
 
