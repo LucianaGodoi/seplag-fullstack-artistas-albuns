@@ -1,10 +1,42 @@
-.list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+/* Cabeçalho da página */
+.page-container {
+    padding: 40px;
 }
 
+.page-title {
+    font-size: 26px;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+/* Filtros */
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.filters input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.filters button {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background: #4338ca;
+}
+
+/* Botão principal */
 .btn-primary {
     background: #7c3aed;
     color: white;
@@ -12,8 +44,63 @@
     padding: 10px 16px;
     border-radius: 8px;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .btn-primary:hover {
     background: #6d28d9;
+}
+
+/* Grid de artistas */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* Card */
+.artist-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.artist-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.artist-card h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.artist-card p {
+    margin-top: 6px;
+    color: #666;
+}
+
+/* Paginação */
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.pagination button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
 }

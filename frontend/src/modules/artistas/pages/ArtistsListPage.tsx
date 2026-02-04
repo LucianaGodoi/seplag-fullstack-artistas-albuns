@@ -45,8 +45,8 @@ export default function ArtistsListPage() {
 
     return (
 
-        <div style={{padding: 40}}>
-            <h2>Artistas</h2>
+        <div className="page-container">
+            <h2 className="page-title">Artistas</h2>
             <div className="filters">
                 <input
                     placeholder="Buscar artista..."
