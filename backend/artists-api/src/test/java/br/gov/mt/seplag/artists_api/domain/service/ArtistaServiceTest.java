@@ -98,15 +98,14 @@ class ArtistaServiceTest {
 
     @Test
     void deveListarArtistasComFiltroPorNome() {
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("nome").ascending());
-        Page<Artista> page = new PageImpl<>(List.of(artista));
 
-        when(artistaRepository.findByNomeContainingIgnoreCase("Art",
-                pageable))
-                .thenReturn(page);
+        Page<ArtistaResumoDTO> page =
+                new PageImpl<>(List.of(resumoDTO));
 
-        when(artistaMapper.toResumo(artista))
-                .thenReturn(resumoDTO);
+        when(artistaRepository.listarComResumo(
+                eq("Art"),
+                any(Pageable.class)
+        )).thenReturn(page);
 
         Page<ArtistaResumoDTO> result =
                 artistaService.listar("Art", 0, 10, "asc");

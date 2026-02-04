@@ -25,14 +25,7 @@ public class ArtistaService {
     public Page<ArtistaResumoDTO> listar(String nome, int page, int size, String sortDir) {
         Sort sort = Sort.by(sortDir.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC, "nome");
         Pageable pageable = PageRequest.of(page, size, sort);
-
-        if (nome != null && !nome.isBlank()) {
-            return artistaRepository.findByNomeContainingIgnoreCase(nome, pageable)
-                    .map(artistaMapper::toResumo);
-        }
-
-        return artistaRepository.findAll(pageable)
-                .map(artistaMapper::toResumo);
+        return artistaRepository.listarComResumo(nome, pageable);
     }
 
     public ArtistaResponseDTO buscarPorId(Long id) {
