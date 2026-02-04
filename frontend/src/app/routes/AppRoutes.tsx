@@ -4,6 +4,7 @@ import ArtistsListPage from "../../modules/artistas/pages/ArtistsListPage";
 import ArtistDetailPage from "../../modules/artistas/pages/ArtistDetailPage";
 import AlbumCreatePage from "../../modules/albuns/pages/AlbumCreatePage";
 import ArtistaFormPage from "../../modules/artistas/pages/ArtistaFormPage.tsx";
+import AlbumEditPage from "../../modules/albuns/pages/AlbumEditPage";
 
 
 import PrivateRoute from "./PrivateRoute";
@@ -18,6 +19,7 @@ export default function AppRoutes() {
                 <Route path="/artistas/:id" element={<ArtistDetailPage />} />
                 <Route path="/albuns/novo" element={<AlbumCreatePage />} />
                 <Route path="/artistas/novo" element={<ArtistaFormPage />} />
+                <Route path="/albuns/:id/editar" element={<AlbumEditPage />} />
 
                 <Route
                     path="/artistas"
