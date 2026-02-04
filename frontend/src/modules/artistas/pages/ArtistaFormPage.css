@@ -1,0 +1,49 @@
+.form-container {
+    padding: 40px;
+    max-width: 600px;
+}
+
+.form-card {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.form-title {
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: #1e293b;
+}
+
+.form-field {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #cbd5f5;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.form-field:focus {
+    border-color: #6366f1;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: #111827;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #d1d5db;
+}
