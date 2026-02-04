@@ -46,20 +46,26 @@ export default function ArtistDetailPage() {
     return (
 
         <div className="detail-container">
-
             <div className="detail-header">
                 <h2 className="detail-title">
                     {artista?.nome}
                 </h2>
-
-                <button
-                    className="btn-primary"
-                    onClick={() =>
-                        navigate(`/albuns/novo?artistaId=${artista?.id}`)
-                    }
-                >
-                    + Novo Álbum
-                </button>
+                <div className="detail-actions">
+                    <button
+                        className="btn-secondary"
+                        onClick={() => navigate("/artistas")}
+                    >
+                        Voltar
+                    </button>
+                    <button
+                        className="btn-primary"
+                        onClick={() =>
+                            navigate(`/albuns/novo?artistaId=${artista?.id}`)
+                        }
+                    >
+                        + Novo Álbum
+                    </button>
+                </div>
             </div>
 
             <h3>Álbuns</h3>
@@ -78,6 +84,7 @@ export default function ArtistDetailPage() {
                         <div
                             key={album.id}
                             className="album-card"
+                            onClick={() => navigate(`/albuns/${album.id}/editar`)}
                         >
 
                             {capa ? (
@@ -104,6 +111,7 @@ export default function ArtistDetailPage() {
                 })}
 
             </div>
+
 
         </div>
     );

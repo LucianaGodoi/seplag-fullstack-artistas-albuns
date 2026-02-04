@@ -47,3 +47,11 @@
 .btn-secondary:hover {
     background: #d1d5db;
 }
+
+.form-actions button {
+    min-width: 140px;
+    height: 42px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}

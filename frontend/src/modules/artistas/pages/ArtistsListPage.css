@@ -45,6 +45,10 @@
     border-radius: 8px;
     cursor: pointer;
     margin-bottom: 20px;
+    min-width: 140px;
+    height: 42px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .btn-primary:hover {
@@ -104,3 +108,4 @@
     background: #ccc;
     cursor: not-allowed;
 }
+
