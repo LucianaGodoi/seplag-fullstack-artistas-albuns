@@ -18,6 +18,21 @@ Implementar uma solução **Full Stack** que possibilite:
 
 ---
 
+## Funcionalidades Implementadas
+
+- Autenticação com JWT (login, refresh token e logout)
+- Controle de acesso por rotas
+- CRUD de Artistas
+- CRUD de Álbuns
+- Associação de álbuns a artistas
+- Upload de múltiplas capas de álbuns
+- Listagem paginada
+- Busca por nome
+- Notificações em tempo real via WebSocket
+- Rate limit por usuário e por IP
+- Documentação automática via Swagger
+
+
 ##  Tecnologias Utilizadas
 
 ### Back-end
@@ -32,12 +47,24 @@ Implementar uma solução **Full Stack** que possibilite:
 - Bucket4j (Rate Limit)
 - Docker / Docker Compose
 
-### Front-end (planejado)
+### Front-end 
 - React
 - TypeScript
-- Vite
-- Arquitetura Facade
 - Tailwind CSS
+- Rotas privadas (Protected Routes)
+- Layout com Header fixo e condicional
+- Consumo de API REST
+- Gerenciamento de autenticação via JWT no browser
+
+## Telas Disponíveis
+
+- Login
+- Listagem de Artistas
+- Detalhe do Artista
+- Criação de Artista
+- Edição de Artista
+- Criação de Álbum
+- Edição de Álbum
 
 ---
 
@@ -317,7 +344,17 @@ Fluxo validado com sucesso.
 
 ## Histórico de Desenvolvimento
 
-O projeto foi desenvolvido de forma incremental e posteriormente organizado em commits semânticos (Conventional Commits) para facilitar a revisão e compreensão da evolução das funcionalidades.
+O projeto foi desenvolvido de forma incremental, com versionamento utilizando Conventional Commits, facilitando a rastreabilidade e entendimento da evolução das funcionalidades.
+
+## Padrões e Boas Práticas Adotadas
+
+- Arquitetura em camadas
+- DTOs para entrada e saída
+- Validação de dados
+- Tratamento global de exceções
+- Commits semânticos (Conventional Commits)
+- Separação de responsabilidades
+- Código limpo e organizado
 
 ##  Observações Finais
 
@@ -328,4 +365,6 @@ Este projeto foi desenvolvido priorizando:
 - Escalabilidade
 - Clareza de documentação
 
-Atendendo integralmente aos requisitos do edital.
+Atendendo integralmente aos requisitos do edital. 
+Todos os requisitos funcionais e técnicos descritos no edital foram implementados e podem ser validados através da execução da aplicação conforme instruções acima.
+
