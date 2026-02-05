@@ -1,4 +1,5 @@
-# Front-end – Gerenciamento de Artistas e Álbuns
+# Front-end – Projeto Full Stack – Gerenciamento de Artistas e Álbuns
+
 
 Aplicação Front-end desenvolvida em React + TypeScript para consumo da API do projeto Gerenciamento de Artistas e Álbuns, criado como Prova Prática Full Stack Sênior – Java + React conforme edital da SEPLAG – Governo do Estado de Mato Grosso.
 
@@ -14,6 +15,19 @@ Fornecer uma interface web moderna, responsiva e intuitiva para:
 - Upload de capas
 - Consumo de notificações via WebSocket
 
+## Funcionalidades Implementadas
+
+- Autenticação via JWT
+- Rotas protegidas
+- Listagem paginada de artistas
+- Visualização de álbuns por artista
+- Cadastro de álbuns
+- Upload de múltiplas capas
+- Header fixo com logout
+- Layout condicional (não exibido no login)
+- Notificações em tempo real via WebSocket
+
+
 ## Tecnologias Utilizadas
 - React 18
 - TypeScript
@@ -25,7 +39,7 @@ Fornecer uma interface web moderna, responsiva e intuitiva para:
 - ESLint
 
 ## Arquitetura
-Estrutura baseada em módulos e separação de responsabilidades:
+A estrutura foi organizada visando escalabilidade, reutilização de componentes e separação de responsabilidades.
 ```text
 src
 ├── app
@@ -57,6 +71,11 @@ Endpoints principais:
 ```text
 Authorization: Bearer <token>
 ```
+## Rotas Protegidas
+
+As rotas da aplicação são protegidas por autenticação.  
+Usuários não autenticados são redirecionados automaticamente para a tela de login.
+
 
 ## Upload de Capas
 - Upload múltiplo de imagens
@@ -115,10 +134,10 @@ VITE_API_URL=http://localhost:8080
 
 O projeto foi desenvolvido de forma incremental e posteriormente organizado em commits semânticos (Conventional Commits) para facilitar a revisão e compreensão da evolução das funcionalidades.
 
+## Conformidade com o Edital
+
+Todos os requisitos funcionais e técnicos referentes ao front-end descritos no edital foram implementados.
+
 
 ## Observações
-O frontend utiliza variáveis de ambiente para definição dinâmica da URL da API, permitindo execução local e em containers sem alteração de código.
-
-O rate limit está configurado para 10 requisições por minuto por usuário. Durante testes locais, múltiplos refreshes consecutivos podem retornar 429 (Too Many Requests), comportamento esperado conforme configuração.
-
-Este front-end foi desenvolvido com foco em clareza, simplicidade e aderência aos requisitos funcionais do projeto, priorizando integração correta com o back-end e boa experiência de uso.
+Este front-end foi desenvolvido com foco em clareza, simplicidade, boa experiência de uso e aderência total aos requisitos do edital, priorizando integração correta com o back-end.
