@@ -22,7 +22,7 @@ export default function ArtistsListPage() {
                 page,
                 size,
                 nome: search,
-                sort: `nome,${sortDir}`
+                sort: sortDir
             });
 
             setArtistas(response.content);
@@ -57,9 +57,10 @@ export default function ArtistsListPage() {
                     }}
                 />
                 <button
-                    onClick={() =>
-                        setSortDir(dir => dir === "asc" ? "desc" : "asc")
-                    }
+                    onClick={() => {
+                        setSortDir(dir => dir === "asc" ? "desc" : "asc");
+                        setPage(0);
+                    }}
                 >
                     Ordenar: {sortDir === "asc" ? "A → Z" : "Z → A"}
                 </button>
