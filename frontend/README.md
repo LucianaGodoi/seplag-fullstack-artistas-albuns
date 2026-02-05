@@ -122,6 +122,27 @@ VITE_API_URL=http://localhost:8080
 - Detalhe do artista com álbuns
 - Cadastro de álbum
 
+## Telas
+
+### Login
+![Login](docs/telas/login.png)
+
+### Listagem de Artistas
+![Artistas](docs/telas/artistas.png)
+
+### Detalhe do Artista com Álbuns
+![Detalhe](docs/telas/artistaAlbuns.png)
+
+### Cadastro de Artista
+![Novo Artista](docs/telas/novoArtista.png)
+
+### Cadastro de Álbum
+![Novo Álbum](docs/telas/novoAlbum.png)
+
+### Edição de Álbum
+![Editar Álbum](docs/telas/editarAlbum.png)
+
+
 ## Boas Práticas Aplicadas
 - Componentização
 - Tipagem forte com TypeScript
